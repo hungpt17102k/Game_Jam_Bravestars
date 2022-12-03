@@ -31,6 +31,8 @@ public class EventManager : MonoBehaviour
 
     public void WinEvent() {
         onWinEvent?.Invoke();
+
+        print("win");
     }
 
     //----------------------------------------------------------------------------
@@ -38,5 +40,29 @@ public class EventManager : MonoBehaviour
 
     public void LoseEvent() {
         onLoseEvent?.Invoke();
+
+        print("lose");
     }
+
+    //----------------------------------------------------------------------------
+    public event Action onSharkBiteEvent;
+
+    public void SharkBiteEvent() {
+        onSharkBiteEvent?.Invoke();
+    }
+
+    //----------------------------------------------------------------------------
+    public event Action<int> onDestroyObsEvent;
+
+    public void DestroyObstacleEvent(int idObs) {
+        onDestroyObsEvent?.Invoke(idObs);
+    }
+
+    //----------------------------------------------------------------------------
+    public event Action<Transform, int> onShowHitBoxEvent;
+
+    public void ShowHitBoxEvent(Transform obsTrans, int idObs) {
+        onShowHitBoxEvent?.Invoke(obsTrans, idObs);
+    }
+
 }

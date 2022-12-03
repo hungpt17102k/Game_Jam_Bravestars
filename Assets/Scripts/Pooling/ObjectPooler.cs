@@ -22,6 +22,8 @@ public class PoolItem
 /// </summary>
 public class ObjectPooler : MonoBehaviour
 {
+    public static ObjectPooler Instance {get; private set;}
+
     /// <summary> Items to pool</summary>
     public List<PoolItem> itemsToPool;
 
@@ -30,6 +32,15 @@ public class ObjectPooler : MonoBehaviour
 
     void Awake()
     {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            Instance = this;
+        }
+
         CreateObjectPool();
     }
 
@@ -109,6 +120,11 @@ public class ObjectPooler : MonoBehaviour
     {
         GameObject obj = GetPooledObject(itemName, activeState);
         obj.transform.position = pos;
+        
+        if(obj.TryGetComponent<IObjectPool>(out IObjectPool io)) {
+            io.OnObjectReuse();
+        }
+
         return obj;
     }
 
@@ -129,6 +145,11 @@ public class ObjectPooler : MonoBehaviour
         GameObject obj = GetPooledObject(itemName, activeState);
         obj.transform.position = posRot.transform.position;
         obj.transform.rotation = posRot.transform.rotation;
+
+        if(obj.TryGetComponent<IObjectPool>(out IObjectPool io)) {
+            io.OnObjectReuse();
+        }
+
         return obj;
     }
 
@@ -153,6 +174,9 @@ public class ObjectPooler : MonoBehaviour
             {
                 pooledItemsList[itemIndex][i].SetActive(false);
 
+                if(pooledItemsList[itemIndex][i].TryGetComponent<IObjectPool>(out IObjectPool io)) {
+                    io.OnDestroyObject();
+                }
             }
         }
     }
@@ -177,7 +201,7 @@ public class ObjectPooler : MonoBehaviour
 
 }
 
-
+#if UNITY_EDITOR
 [CustomEditor(typeof(ObjectPooler), true)]
 public class ObjectPoolerEditor : Editor
 {
@@ -231,3 +255,4 @@ public class ObjectPoolerEditor : Editor
 
     }
 }
+#endif

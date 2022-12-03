@@ -2,12 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Obstacle : MonoBehaviour, IObjectPool
+public class Shark : MonoBehaviour, IObjectPool
 {
+    public int idShark;
+
     private Boat _boat;
     private Vector3 _boatPos;
 
     private float _moveSpeed = 2f;
+
+    private bool _isHit;
 
     public void OnDestroyObject()
     {
@@ -20,7 +24,7 @@ public class Obstacle : MonoBehaviour, IObjectPool
     }
 
     // private void OnMouseDown() {
-    //     // EventManager.Instance.DestroyObstacleEvent();
+    //     EventManager.Instance.DestroyObstacleEvent(idShark);
 
     //     OnDestroyObject();
     // }
@@ -31,14 +35,20 @@ public class Obstacle : MonoBehaviour, IObjectPool
     }
 
     private void Update() {
-        transform.position = Vector3.MoveTowards(transform.position, _boatPos, _moveSpeed * Time.deltaTime);
+        if(!_isHit) {
+            transform.position = Vector3.MoveTowards(transform.position, _boatPos, _moveSpeed * Time.deltaTime);
+        }
     }
 
     private void OnCollisionEnter(Collision other) {
-        if(other.gameObject.layer == 6) {
-            OnDestroyObject();
+        if(other.gameObject.layer == 6 && !_isHit) {
+            _isHit = true;
 
-            EventManager.Instance.LoseEvent();
+            print("hit boat");
+
+            EventManager.Instance.SharkBiteEvent();
+
+            EventManager.Instance.ShowHitBoxEvent(this.transform, idShark);
         }
     }
 }

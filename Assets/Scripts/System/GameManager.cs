@@ -54,6 +54,12 @@ public sealed class GameManager : MonoBehaviour
 
 
     // ------------------------------------Add Action Event------------------------------
+    private void AddEvent() {
+        EventManager.Instance.onSharkBiteEvent += () => {
+            gameMode = GameMode.Hit_Obs;
+        };
+    }
+
     private void AddInputEvent() {
         input.firstTouchAction = FirstTouchGameMode;
         input.holdTouchAction = null;

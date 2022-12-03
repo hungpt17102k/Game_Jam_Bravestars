@@ -38,9 +38,11 @@ public class Boat : MonoBehaviour
     private void Sinking() {
         transform.position += Vector3.down * sinkSpeed * Time.deltaTime;
 
-        if(transform.position.y <= 2f && !_boatSinked) {
+        if(transform.position.y <= -0.8f && !_boatSinked) {
             EventManager.Instance.LoseEvent();
+
             _boatSinked = true;
+            IsSinking = false;
         }
     }
 
