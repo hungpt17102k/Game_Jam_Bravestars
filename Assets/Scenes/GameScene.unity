@@ -645,6 +645,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   normalsShader: {fileID: 4800000, guid: 380378acd88467349a00f1ef12caeaae, type: 3}
+--- !u!1 &982305337 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7531629317460084671, guid: a4ce343ab136be8499e73b752332e7e3, type: 3}
+  m_PrefabInstance: {fileID: 7531629316599436267}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &982305342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 982305337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bb1e10575dcb8244ba25f90dff71174, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1076208134
 GameObject:
   m_ObjectHideFlags: 0
@@ -699,6 +716,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1323754513}
   - component: {fileID: 1323754514}
+  - component: {fileID: 1323754515}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -738,6 +756,19 @@ MonoBehaviour:
   input: {fileID: 1400021017}
   gameMode: 0
   boat: {fileID: 151739876}
+--- !u!114 &1323754515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1323754512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e813d17b4def271438b80938aa2c3dd7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemsToPool: []
 --- !u!1 &1324492498
 GameObject:
   m_ObjectHideFlags: 0
