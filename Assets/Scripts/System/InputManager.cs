@@ -42,25 +42,7 @@ public class InputManager : MonoBehaviour
     }
 
     private void AddEvent() {
-        // // Add to enter level event
-        // EventManager.Instance.onEnterLevelEvent += () => {
-        //     this.enabled = true;
-        // };
 
-        // // Add to win event
-        // EventManager.Instance.onWinEvent[EventManager.WinAction.Pass_Finish_Line] += () => {
-        //     this.enabled = false;
-        // };
-
-        // // Add to lose event
-        // EventManager.Instance.onLoseEvent[EventManager.LoseAction.Hit_Obs] += () => {
-        //     this.enabled = false;
-        // };
-
-        // // Add to continue level event
-        // EventManager.Instance.onContinueLevelEvent += () => {
-        //     this.enabled = true;
-        // };
     }
 
     //--------------------------------Physic Input------------------------------
@@ -69,7 +51,7 @@ public class InputManager : MonoBehaviour
             firstTouchAction?.Invoke();
         }
         else if(Input.GetMouseButton(_inputMouse)) {
-            holdTouchAction();
+            holdTouchAction?.Invoke();
         }
         else if(Input.GetMouseButtonUp(_inputMouse)) {
             endTouchAction?.Invoke();
@@ -83,19 +65,19 @@ public class InputManager : MonoBehaviour
 
             switch(touch.phase) {
                 case TouchPhase.Began:
-                    firstTouchAction();
+                    firstTouchAction?.Invoke();
                     break;
 
                 case TouchPhase.Stationary:
-                    holdTouchAction();
+                    holdTouchAction?.Invoke();
                     break;
 
                 case TouchPhase.Moved:
-                    holdTouchAction();
+                    holdTouchAction?.Invoke();
                     break;
                 
                 case TouchPhase.Ended:
-                    endTouchAction();
+                    endTouchAction?.Invoke();
                     break;
             }
         }

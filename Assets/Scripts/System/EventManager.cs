@@ -20,9 +20,23 @@ public class EventManager : MonoBehaviour
     }
     
     //----------------------------------------------------------------------------
-    public event Action<int, int> onRopeCuttedEvent;
+    public event Action onStartGameEvent;
+    
+    public void StartGameEvent() {
+        onStartGameEvent?.Invoke();
+    }
 
-    public void RopeCuttedEvent(int ropeId, int linkId) {
-        onRopeCuttedEvent?.Invoke(ropeId, linkId);
+    //----------------------------------------------------------------------------
+    public event Action onWinEvent;
+
+    public void WinEvent() {
+        onWinEvent?.Invoke();
+    }
+
+    //----------------------------------------------------------------------------
+    public event Action onLoseEvent;
+
+    public void LoseEvent() {
+        onLoseEvent?.Invoke();
     }
 }

@@ -31,13 +31,42 @@ public sealed class GameManager : MonoBehaviour
     private float _frequency = 1.0f;
     private string _fps;
 
+    [Title("MANAGER REFERENCE PROPERTY", bold: true, horizontalLine: true), Space(2)]
+    public InputManager input;
+    public GameMode gameMode;
+
+    [Title("OBJECT SCENE PROPERTY", bold: true, horizontalLine: true), Space(2)]
+    public Boat boat;
+
+    public enum GameMode {
+        Float_The_Boat,
+        Hit_Obs
+    }
 
     // ------------------------------------Unity Function------------------------------
     private IEnumerator Start()
     {
         StartCoroutine(FPS());
-
         yield return new WaitForEndOfFrame();
+
+        AddInputEvent();
+    }
+
+
+    // ------------------------------------Add Action Event------------------------------
+    private void AddInputEvent() {
+        input.firstTouchAction = FirstTouchGameMode;
+        input.holdTouchAction = null;
+        input.endTouchAction = null;
+    }
+
+    private void FirstTouchGameMode() {
+        if(gameMode == GameMode.Float_The_Boat) {
+            ScoopingWater();
+        }
+        else {
+            HitObstacle();
+        }
     }
 
     // ------------------------------------System Checking Function------------------------------
@@ -103,4 +132,12 @@ public sealed class GameManager : MonoBehaviour
 
 
     // ------------------------------------Game Function------------------------------
+    public void ScoopingWater() {
+        boat.Floating();
+    }
+
+    public void HitObstacle() {
+        print("Hit Obs");
+    }
+    
 }
