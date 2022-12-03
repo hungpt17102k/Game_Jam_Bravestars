@@ -73,6 +73,13 @@ public class EventManager : MonoBehaviour
     }
 
     //----------------------------------------------------------------------------
+    public event Action onFailHitBoxEvent;
+
+    public void FailHitBoxEvent() {
+        onFailHitBoxEvent?.Invoke();
+    }
+
+    //----------------------------------------------------------------------------
     public event Action<int> onScorePointEvent;
 
     public void ScorePointEvent(int point) {

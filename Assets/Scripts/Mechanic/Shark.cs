@@ -15,6 +15,8 @@ public class Shark : MonoBehaviour, IObjectPool
 
     public void OnDestroyObject()
     {
+        GameManager.Instance.ResortTime();
+
         gameObject.SetActive(false);
     }
 
@@ -52,9 +54,15 @@ public class Shark : MonoBehaviour, IObjectPool
 
             print("hit boat");
 
+            SoundManager.Instance.playSound(AudioClips.BoatSmash);
+
             EventManager.Instance.SharkBiteEvent();
 
             EventManager.Instance.ShowHitBoxEvent(this.transform, idObs);
+
+            GameManager.Instance.SlowTime();
         }
     }
+
+
 }

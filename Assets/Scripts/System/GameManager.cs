@@ -39,13 +39,14 @@ public sealed class GameManager : MonoBehaviour
 
     [Title("MANAGER REFERENCE PROPERTY", bold: true, horizontalLine: true), Space(2)]
     public InputManager input;
+    public SpawnObstacle spawn;
     public GameMode gameMode;
 
     [Title("OBJECT SCENE PROPERTY", bold: true, horizontalLine: true), Space(2)]
     public Boat boat;
 
     [Title("GAME PROPERTY", bold: true, horizontalLine: true), Space(2)]
-    public float timePlayMax = 20f;
+    public float timePlayMax = 30f;
 
     // Get Set
     public float TimePlay {get; set;}
@@ -199,6 +200,14 @@ public sealed class GameManager : MonoBehaviour
 
     public float GameTimeConvert() {
         return Extensions.ScaleValue(TimePlay, 0f, timePlayMax, 0f, 1f);
+    }
+
+    public void SlowTime(float amount = 0.2f) {
+        Time.timeScale = amount;
+    }
+
+    public void ResortTime() {
+        Time.timeScale = 1f;
     }
     
 }

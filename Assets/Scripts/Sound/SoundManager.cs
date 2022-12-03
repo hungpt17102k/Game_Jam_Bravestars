@@ -42,7 +42,7 @@ public class SoundManager : PnCSoundManger
     /// </summary>
     public void toggleSoundOnOff()
     {
-        playSound(AudioClips.UI);
+        // playSound(AudioClips.UI);
         isSoundOn = !isSoundOn;
         applySoundSetting();
         // PlayerData.Instance.soundSetting = isSoundOn;

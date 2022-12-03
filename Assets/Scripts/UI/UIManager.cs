@@ -35,6 +35,12 @@ public class UIManager : MonoBehaviour
     //------------------------------------Unity Functions------------------------------------
     private void Start()
     {
+        CloseGamePanel();
+        CloseWinPanel();
+        CloseLosePanel();
+
+        ShowMenuPanel();
+
         // Add event to all panel
         AddEventAllPanel();
 
@@ -61,12 +67,6 @@ public class UIManager : MonoBehaviour
             CloseMenuPanel();
 
             ShowGamePanel();
-        };
-
-        EventManager.Instance.onWinEvent += () => {
-            CloseGamePanel();
-
-            ShowWinPanel();
         };
 
         EventManager.Instance.onLoseEvent += () => {

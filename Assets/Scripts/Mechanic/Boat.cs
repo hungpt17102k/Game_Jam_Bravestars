@@ -10,6 +10,8 @@ public class Boat : MonoBehaviour
     [SerializeField] private float floatAmount = 0.05f;
     [SerializeField] private float sinkSpeed = 0.1f;
 
+    [SerializeField] private GameObject winVFX;
+
     [Title("CHARACTER PROPERTY", bold: true, horizontalLine: true), Space(2)]
     [SerializeField] private Animator characterAni;
 
@@ -34,7 +36,7 @@ public class Boat : MonoBehaviour
 
     private void AddEvent() {
         EventManager.Instance.onSharkBiteEvent += () => {
-            sinkSpeed *= 2;
+            sinkSpeed *= 7;
         };
 
         EventManager.Instance.onDestroyObsEvent += (id) => {
@@ -43,6 +45,8 @@ public class Boat : MonoBehaviour
 
         EventManager.Instance.onStartGameEvent += () => {
             IsSinking = true;
+
+            SoundManager.Instance.playSound(AudioClips.WaterBucket);
         };
 
         EventManager.Instance.onWinEvent += () => {
@@ -85,7 +89,18 @@ public class Boat : MonoBehaviour
     }
 
     private void MoveToIsLand() {
+        GameObject island = GameObject.FindGameObjectWithTag("Island");
 
+        transform.DOMove(island.transform.GetChild(0).position, 6f)
+            .OnComplete( () => {
+                Vector3 pos = new Vector3(transform.position.x, 5f, transform.position.z);
+
+                GameObject effect = Instantiate(winVFX, pos, Quaternion.identity);
+
+                UIManager.Instance.ShowWinPanel();
+
+                Destroy(effect, 3f);
+            });
     }
 
     private void SinkDownToOcean() {

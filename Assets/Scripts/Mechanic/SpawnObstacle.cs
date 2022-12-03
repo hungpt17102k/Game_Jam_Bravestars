@@ -9,7 +9,7 @@ public class SpawnObstacle : MonoBehaviour
     public List<Transform> spawnPosList = new List<Transform>();
 
     [Title("SPAWN PROPERTY", bold: true, horizontalLine: true), Space(2)]
-    [SerializeField] private float timeSpawnObs = 2f;
+    [SerializeField] private float timeSpawnObs = 1.5f;
     private float _timeBtwSpawn = 0f;
 
     private ObjectPoolItems _objectPoolItem;
@@ -88,6 +88,14 @@ public class SpawnObstacle : MonoBehaviour
 
     public void DisableAllObs() {
         ObjectPooler.Instance.disableAllPooled();
+    }
+
+    public bool IsShark() {
+        return _isShark;
+    }
+
+    public Transform GetCurrentObsTrans() {
+        return _currentObs.transform;
     }
 
 }

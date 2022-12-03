@@ -13,7 +13,7 @@ public class Obstacle : MonoBehaviour, IObjectPool
 
     public void OnDestroyObject()
     {
-        Time.timeScale = 1f;
+        GameManager.Instance.ResortTime();
 
         gameObject.SetActive(false);
     }
@@ -54,7 +54,9 @@ public class Obstacle : MonoBehaviour, IObjectPool
         if(other.gameObject.layer == 8) {
             EventManager.Instance.ShowHitBoxEvent(this.transform, idObs);
 
-            Time.timeScale = 0.1f;
+            SoundManager.Instance.playSound(AudioClips.BoatSmash);
+
+            GameManager.Instance.SlowTime();
         }
     }
 }
