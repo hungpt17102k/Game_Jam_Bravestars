@@ -1847,7 +1847,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41a6b3601e262c043b48ab03d998cbac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitBox: {fileID: 1439888737}
+  hitBoxTrans: {fileID: 1439888738}
 --- !u!1001 &1395485129643696513
 PrefabInstance:
   m_ObjectHideFlags: 0
