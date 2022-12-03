@@ -3530,6 +3530,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0ef4993f996998428ace87c04cba8e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defaultTrans: {fileID: 1938662715}
   zoomOutTrans: {fileID: 583300637}
 --- !u!114 &983856848 stripped
 MonoBehaviour:
@@ -4561,7 +4562,7 @@ GameObject:
   - component: {fileID: 1273137235}
   - component: {fileID: 1273137234}
   - component: {fileID: 1273137233}
-  - component: {fileID: 1273137232}
+  - component: {fileID: 1273137236}
   m_Layer: 5
   m_Name: Lose Panel
   m_TagString: Untagged
@@ -4569,19 +4570,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
---- !u!114 &1273137232
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1273137231}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a30155640ef224e45bc6123f2d3325ec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playButton: {fileID: 0}
 --- !u!114 &1273137233
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4645,6 +4633,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1273137236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1273137231}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a816f6868434b84fa8e4ca491ab058e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resetButton: {fileID: 400428752}
 --- !u!1 &1275894503
 GameObject:
   m_ObjectHideFlags: 0
@@ -6576,7 +6577,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a30155640ef224e45bc6123f2d3325ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playButton: {fileID: 0}
+  resetButton: {fileID: 311212835}
 --- !u!114 &1880305790
 MonoBehaviour:
   m_ObjectHideFlags: 0

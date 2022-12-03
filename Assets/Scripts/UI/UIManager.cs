@@ -74,6 +74,13 @@ public class UIManager : MonoBehaviour
 
             ShowLosePanel();
         };
+
+        EventManager.Instance.onResetGameEvent += () => {
+            CloseWinPanel();
+            CloseLosePanel();
+
+            ShowMenuPanel();
+        };
     }
 
     //------------------------------------UI Show/Close Panel Functions------------------------------------

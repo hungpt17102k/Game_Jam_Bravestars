@@ -1,18 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using Sirenix.OdinInspector;
+using DG.Tweening;
 
-public class LosePanel : MonoBehaviour
+public class LosePanel : MonoBehaviour, IPanelUI
 {
-    // Start is called before the first frame update
-    void Start()
+    [Title("OBJECT UI", bold: true, horizontalLine: true), Space(2)]
+    public Button resetButton;
+
+
+    //------------------------------------Unity Functions----------------------------------
+    private void Start()
     {
-        
+
     }
 
-    // Update is called once per frame
-    void Update()
+    //------------------------------------Event of Panel----------------------------------
+
+    public void AddEventPanel()
     {
-        
+
     }
+
+    public void AddButtonEventPanel()
+    {
+        resetButton.onClick.AddListener( () => {
+            EventManager.Instance.ResetGameEvent();
+        });
+    }
+
+    //------------------------------------Functions----------------------------------
 }

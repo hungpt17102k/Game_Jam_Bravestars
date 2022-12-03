@@ -5,6 +5,7 @@ using DG.Tweening;
 
 public class CameraControll : MonoBehaviour
 {
+    public Transform defaultTrans;
     public Transform zoomOutTrans;
 
     //------------------------------------Unity Functions----------------------------------
@@ -20,10 +21,18 @@ public class CameraControll : MonoBehaviour
         EventManager.Instance.onWinEvent += () => {
             ZoomOutCamera();
         };
+
+        EventManager.Instance.onResetGameEvent += () => {
+            ResetCamera();
+        };
     }
 
     //------------------------------------Functions----------------------------------
     public void ZoomOutCamera() {
         transform.DOMove(zoomOutTrans.position, 5f).SetEase(Ease.Linear);
+    }
+
+    public void ResetCamera() {
+        transform.position = defaultTrans.position;
     }
 }

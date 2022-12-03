@@ -60,6 +60,10 @@ public class Boat : MonoBehaviour
 
             SinkDownToOcean();
         };
+
+        EventManager.Instance.onResetGameEvent += () => {
+            ResetBeginPosition();
+        };
     }
 
     public void Floating() {
@@ -105,6 +109,11 @@ public class Boat : MonoBehaviour
 
     private void SinkDownToOcean() {
 
+    }
+
+    private void ResetBeginPosition() {
+        transform.position = Vector3.zero;
+        transform.rotation = Quaternion.identity;
     }
 
 }

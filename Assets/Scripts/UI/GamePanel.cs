@@ -40,6 +40,10 @@ public class GamePanel : MonoBehaviour, IPanelUI
         EventManager.Instance.onWinEvent += () => {
             finishIcon.gameObject.SetActive(false);
         };
+
+        EventManager.Instance.onResetGameEvent += () => {
+            
+        };
     }
 
     public void AddButtonEventPanel()

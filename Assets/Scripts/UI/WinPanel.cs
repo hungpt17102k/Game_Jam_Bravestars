@@ -5,10 +5,10 @@ using UnityEngine.UI;
 using Sirenix.OdinInspector;
 using DG.Tweening;
 
-public class WinPanel : MonoBehaviour
+public class WinPanel : MonoBehaviour, IPanelUI
 {
     [Title("OBJECT UI", bold: true, horizontalLine: true), Space(2)]
-    public Button playButton;
+    public Button resetButton;
 
 
     //------------------------------------Unity Functions----------------------------------
@@ -26,8 +26,8 @@ public class WinPanel : MonoBehaviour
 
     public void AddButtonEventPanel()
     {
-        playButton.onClick.AddListener( () => {
-
+        resetButton.onClick.AddListener( () => {
+            EventManager.Instance.ResetGameEvent();
         });
     }
 
