@@ -47,6 +47,7 @@ public sealed class GameManager : MonoBehaviour
 
     [Title("GAME PROPERTY", bold: true, horizontalLine: true), Space(2)]
     public float timePlayMax = 30f;
+    public int score = 0;
 
     // Get Set
     public float TimePlay {get; set;}
@@ -88,6 +89,8 @@ public sealed class GameManager : MonoBehaviour
 
         EventManager.Instance.onLoseEvent += () => {
             input.firstTouchAction = null;
+
+            StopCoroutine(_startGameCoroutine);
         };
 
         EventManager.Instance.onStartGameEvent += () => {
@@ -177,6 +180,8 @@ public sealed class GameManager : MonoBehaviour
     // ------------------------------------Game Function------------------------------
     public void ScoopingWater() {
         boat.Floating();
+
+        EventManager.Instance.ScorePointEvent(1);
     }
 
     public void HitObstacle() {

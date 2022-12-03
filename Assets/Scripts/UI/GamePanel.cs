@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Sirenix.OdinInspector;
 using DG.Tweening;
+using TMPro;
 
 public class GamePanel : MonoBehaviour, IPanelUI
 {
@@ -13,6 +14,7 @@ public class GamePanel : MonoBehaviour, IPanelUI
     public Image gameProcessImg;
     public RectTransform boatIcon;
     public Image finishIcon;
+    public TextMeshProUGUI scoreTxt;
 
 
     //------------------------------------Unity Functions----------------------------------
@@ -41,9 +43,7 @@ public class GamePanel : MonoBehaviour, IPanelUI
             finishIcon.gameObject.SetActive(false);
         };
 
-        EventManager.Instance.onResetGameEvent += () => {
-            
-        };
+        EventManager.Instance.onScorePointEvent += UpdateScore;
     }
 
     public void AddButtonEventPanel()
@@ -77,6 +77,11 @@ public class GamePanel : MonoBehaviour, IPanelUI
         gameProcessImg.fillAmount = GameManager.Instance.GameTimeConvert();
 
         boatIcon.localPosition = Vector3.right * Extensions.ScaleValue(gameProcessImg.fillAmount * 100, 0f, 100f, -335f, 325f);
+    }
+
+    public void UpdateScore(int amount) {
+        GameManager.Instance.score += amount;
+        scoreTxt.text = GameManager.Instance.score.ToString();
     }
 
 

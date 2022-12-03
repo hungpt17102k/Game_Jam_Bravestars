@@ -75,6 +75,8 @@ public class HitBox : MonoBehaviour
 
             GameManager.Instance.ResortTime();
 
+            EventManager.Instance.ScorePointEvent(100);
+
             Destroy(this.gameObject);
         }
         else
@@ -82,6 +84,8 @@ public class HitBox : MonoBehaviour
             EventManager.Instance.DestroyObstacleEvent(idHitBox);
 
             GameManager.Instance.ResortTime();
+
+            EventManager.Instance.ScorePointEvent(100);
 
             Destroy(this.gameObject);
         }
