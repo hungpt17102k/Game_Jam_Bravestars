@@ -16,16 +16,46 @@ public class Boat : MonoBehaviour
     // Get Set Variable
     public bool IsSinking {get; set;}
     private bool _boatSinked = false;
+    private float _defaultSinkSpeed;
 
     private void Start() {
-        IsSinking = true;
+        _defaultSinkSpeed = sinkSpeed;
+        IsSinking = false;
         characterAni.CrossFade("ScoopingWater", 0, 0);
+
+        AddEvent();
     }
 
     private void Update() {
         if(IsSinking) {
             Sinking();
         }
+    }
+
+    private void AddEvent() {
+        EventManager.Instance.onSharkBiteEvent += () => {
+            sinkSpeed *= 2;
+        };
+
+        EventManager.Instance.onDestroyObsEvent += (id) => {
+            sinkSpeed = _defaultSinkSpeed;
+        };
+
+        EventManager.Instance.onStartGameEvent += () => {
+            IsSinking = true;
+        };
+
+        EventManager.Instance.onWinEvent += () => {
+            IsSinking = false;
+
+            MoveToIsLand();
+        };
+
+        EventManager.Instance.onLoseEvent += () => {
+            IsSinking = false;
+
+            SinkDownToOcean();
+        };
     }
 
     public void Floating() {
@@ -52,6 +82,14 @@ public class Boat : MonoBehaviour
 
     public float WaterHeight() {
         return Extensions.ScaleValue(transform.position.y, -0.8f, 0f, 0f, 1f);
+    }
+
+    private void MoveToIsLand() {
+
+    }
+
+    private void SinkDownToOcean() {
+
     }
 
 }

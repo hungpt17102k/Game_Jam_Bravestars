@@ -27,6 +27,13 @@ public class EventManager : MonoBehaviour
     }
 
     //----------------------------------------------------------------------------
+    public event Action onResetGameEvent;
+    
+    public void ResetGameEvent() {
+        onResetGameEvent?.Invoke();
+    }
+
+    //----------------------------------------------------------------------------
     public event Action onWinEvent;
 
     public void WinEvent() {
@@ -64,5 +71,21 @@ public class EventManager : MonoBehaviour
     public void ShowHitBoxEvent(Transform obsTrans, int idObs) {
         onShowHitBoxEvent?.Invoke(obsTrans, idObs);
     }
+
+    //----------------------------------------------------------------------------
+    public event Action<int> onScorePointEvent;
+
+    public void ScorePointEvent(int point) {
+        onScorePointEvent?.Invoke(point);
+    }
+
+    //----------------------------------------------------------------------------
+    public event Action<int> onReciveMoneyEvent;
+
+    public void ReviceMoneyEvent(int amount) {
+        onReciveMoneyEvent?.Invoke(amount);
+    }
+
+    //----------------------------------------------------------------------------
 
 }

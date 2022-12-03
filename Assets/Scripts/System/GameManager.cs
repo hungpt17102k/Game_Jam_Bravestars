@@ -59,7 +59,6 @@ public sealed class GameManager : MonoBehaviour
         StartCoroutine(FPS());
         yield return new WaitForEndOfFrame();
 
-        AddInputEvent();
         AddEvent();
 
         yield return new WaitForEndOfFrame();
@@ -70,13 +69,19 @@ public sealed class GameManager : MonoBehaviour
     private void AddEvent() {
         EventManager.Instance.onSharkBiteEvent += () => {
             gameMode = GameMode.Hit_Obs;
+
+            TimeMutipler = 0;
         };
 
         EventManager.Instance.onDestroyObsEvent += (id) => {
             gameMode = GameMode.Float_The_Boat;
+
+            TimeMutipler = 1;
         };
 
         EventManager.Instance.onWinEvent += () => {
+            input.firstTouchAction = null;
+
             StopCoroutine(_startGameCoroutine);
         };
 
@@ -86,6 +91,8 @@ public sealed class GameManager : MonoBehaviour
 
         EventManager.Instance.onStartGameEvent += () => {
             _startGameCoroutine = StartCoroutine(GamePlayTiming());
+
+            AddInputEvent();
         };
     }
 
@@ -188,6 +195,10 @@ public sealed class GameManager : MonoBehaviour
 
         // Trigger win event
         EventManager.Instance.WinEvent();
+    }
+
+    public float GameTimeConvert() {
+        return Extensions.ScaleValue(TimePlay, 0f, timePlayMax, 0f, 1f);
     }
     
 }

@@ -37,6 +37,8 @@ public class UIManager : MonoBehaviour
     {
         // Add event to all panel
         AddEventAllPanel();
+
+        AddEvent();
     }
 
     //------------------------------------Event of all Panel------------------------------------
@@ -52,6 +54,26 @@ public class UIManager : MonoBehaviour
                 ipanel.AddButtonEventPanel();
             }
         }
+    }
+
+    public void AddEvent() {
+        EventManager.Instance.onStartGameEvent += () => {
+            CloseMenuPanel();
+
+            ShowGamePanel();
+        };
+
+        EventManager.Instance.onWinEvent += () => {
+            CloseGamePanel();
+
+            ShowWinPanel();
+        };
+
+        EventManager.Instance.onLoseEvent += () => {
+            CloseGamePanel();
+
+            ShowLosePanel();
+        };
     }
 
     //------------------------------------UI Show/Close Panel Functions------------------------------------

@@ -9,8 +9,11 @@ public class GamePanel : MonoBehaviour, IPanelUI
 {
     [Title("OBJECT UI", bold: true, horizontalLine: true), Space(2)]
     public RectTransform hitBoxTrans;
-
     public Image waterProcessImg;
+    public Image gameProcessImg;
+    public RectTransform boatIcon;
+    public Image finishIcon;
+
 
     //------------------------------------Unity Functions----------------------------------
     private void Start()
@@ -21,7 +24,7 @@ public class GamePanel : MonoBehaviour, IPanelUI
     private void Update() {
         WaterProcess();
 
-
+        GameProcess();
     }
 
     //------------------------------------Event of Panel----------------------------------
@@ -29,6 +32,14 @@ public class GamePanel : MonoBehaviour, IPanelUI
     public void AddEventPanel()
     {
         EventManager.Instance.onShowHitBoxEvent += ApearHitBox;
+
+        EventManager.Instance.onStartGameEvent += () => {
+            finishIcon.gameObject.SetActive(true);
+        };
+
+        EventManager.Instance.onWinEvent += () => {
+            finishIcon.gameObject.SetActive(false);
+        };
     }
 
     public void AddButtonEventPanel()
@@ -36,6 +47,7 @@ public class GamePanel : MonoBehaviour, IPanelUI
 
     }
 
+    //------------------------------------Functions----------------------------------
     public void ApearHitBox(Transform obs, int idObs)
     {
         Vector2 hitboxUIPosition = RectTransformUtility.WorldToScreenPoint(Camera.main, obs.position);
@@ -57,6 +69,11 @@ public class GamePanel : MonoBehaviour, IPanelUI
         waterProcessImg.fillAmount = 1f - GameManager.Instance.boat.WaterHeight();
     }
 
-    
+    public void GameProcess() {
+        gameProcessImg.fillAmount = GameManager.Instance.GameTimeConvert();
+
+        boatIcon.localPosition = Vector3.right * Extensions.ScaleValue(gameProcessImg.fillAmount * 100, 0f, 100f, -335f, 325f);
+    }
+
 
 }

@@ -21,6 +21,8 @@ public class SpawnObstacle : MonoBehaviour
 
     private void Start() {
         AddEvent();
+
+        this.enabled = false;
     }
 
     void Update()
@@ -43,6 +45,24 @@ public class SpawnObstacle : MonoBehaviour
         EventManager.Instance.onDestroyObsEvent += (id) => {
             ResetCurrentObs();
         };
+
+        EventManager.Instance.onWinEvent += () => {
+            DisableAllObs();
+
+            this.enabled = false;
+        };
+
+        EventManager.Instance.onLoseEvent += () => {
+            DisableAllObs();
+
+            this.enabled = false;
+        };
+
+        EventManager.Instance.onStartGameEvent += () => {
+            ResetCurrentObs();
+
+            this.enabled = true;
+        };
     }
 
     public void Spawning() {
@@ -60,11 +80,14 @@ public class SpawnObstacle : MonoBehaviour
         _isShark = !_isShark;
 
         _idObs++;
-
     }
 
     public void ResetCurrentObs() {
         _currentObs = null;
+    }
+
+    public void DisableAllObs() {
+        ObjectPooler.Instance.disableAllPooled();
     }
 
 }
