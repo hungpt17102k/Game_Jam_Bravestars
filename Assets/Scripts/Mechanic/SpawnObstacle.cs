@@ -16,8 +16,8 @@ public class SpawnObstacle : MonoBehaviour
     private Vector3 _posSpawn;
 
     private bool _isShark = true;
-
     private GameObject _currentObs;
+    private int _idObs = 1;
 
     private void Start() {
         AddEvent();
@@ -47,12 +47,20 @@ public class SpawnObstacle : MonoBehaviour
 
     public void Spawning() {
         _objectPoolItem = _isShark ? ObjectPoolItems.Shark : ObjectPoolItems.Rock;
+        _posSpawn = spawnPosList[Random.Range(0, spawnPosList.Count)].position;
+        _currentObs = ObjectPooler.Instance.GetPooledObject(_objectPoolItem, _posSpawn, true);
+
+        if(_isShark) {
+            _currentObs.GetComponent<Shark>().idObs = _idObs;
+        }
+        else {
+            _currentObs.GetComponent<Obstacle>().idObs = _idObs;
+        }
 
         _isShark = !_isShark;
 
-        _posSpawn = spawnPosList[Random.Range(0, spawnPosList.Count)].position;
+        _idObs++;
 
-        _currentObs = ObjectPooler.Instance.GetPooledObject(_objectPoolItem, _posSpawn, true);
     }
 
     public void ResetCurrentObs() {

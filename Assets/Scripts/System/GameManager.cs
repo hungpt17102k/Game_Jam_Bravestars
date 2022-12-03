@@ -21,6 +21,12 @@ public sealed class GameManager : MonoBehaviour
         }
     }
 
+    // ---------------------------------Game Mode------------------------------
+    public enum GameMode {
+        Float_The_Boat,
+        Hit_Obs
+    }
+
     // ---------------------------------Variable of GameManager------------------------------
     [Title("SYSTEM CHECKING PROPERTY", bold: true, horizontalLine: true), Space(2)]
     public bool showFPS;
@@ -38,10 +44,14 @@ public sealed class GameManager : MonoBehaviour
     [Title("OBJECT SCENE PROPERTY", bold: true, horizontalLine: true), Space(2)]
     public Boat boat;
 
-    public enum GameMode {
-        Float_The_Boat,
-        Hit_Obs
-    }
+    [Title("GAME PROPERTY", bold: true, horizontalLine: true), Space(2)]
+    public float timePlayMax = 20f;
+
+    // Get Set
+    public float TimePlay {get; set;}
+    public int TimeMutipler {get; set;}
+
+    private Coroutine _startGameCoroutine;
 
     // ------------------------------------Unity Function------------------------------
     private IEnumerator Start()
@@ -50,6 +60,9 @@ public sealed class GameManager : MonoBehaviour
         yield return new WaitForEndOfFrame();
 
         AddInputEvent();
+        AddEvent();
+
+        yield return new WaitForEndOfFrame();
     }
 
 
@@ -57,6 +70,22 @@ public sealed class GameManager : MonoBehaviour
     private void AddEvent() {
         EventManager.Instance.onSharkBiteEvent += () => {
             gameMode = GameMode.Hit_Obs;
+        };
+
+        EventManager.Instance.onDestroyObsEvent += (id) => {
+            gameMode = GameMode.Float_The_Boat;
+        };
+
+        EventManager.Instance.onWinEvent += () => {
+            StopCoroutine(_startGameCoroutine);
+        };
+
+        EventManager.Instance.onLoseEvent += () => {
+            input.firstTouchAction = null;
+        };
+
+        EventManager.Instance.onStartGameEvent += () => {
+            _startGameCoroutine = StartCoroutine(GamePlayTiming());
         };
     }
 
@@ -144,6 +173,21 @@ public sealed class GameManager : MonoBehaviour
 
     public void HitObstacle() {
         print("Hit Obs");
+    }
+
+    public IEnumerator GamePlayTiming() {
+        TimePlay = 0f;
+
+        TimeMutipler = 1;
+
+        while(TimePlay < timePlayMax) {
+            TimePlay += Time.deltaTime * TimeMutipler;
+
+            yield return null;
+        }
+
+        // Trigger win event
+        EventManager.Instance.WinEvent();
     }
     
 }

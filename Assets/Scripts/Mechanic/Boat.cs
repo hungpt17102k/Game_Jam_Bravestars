@@ -10,12 +10,16 @@ public class Boat : MonoBehaviour
     [SerializeField] private float floatAmount = 0.05f;
     [SerializeField] private float sinkSpeed = 0.1f;
 
+    [Title("CHARACTER PROPERTY", bold: true, horizontalLine: true), Space(2)]
+    [SerializeField] private Animator characterAni;
+
     // Get Set Variable
     public bool IsSinking {get; set;}
     private bool _boatSinked = false;
 
     private void Start() {
         IsSinking = true;
+        characterAni.CrossFade("ScoopingWater", 0, 0);
     }
 
     private void Update() {
@@ -44,6 +48,10 @@ public class Boat : MonoBehaviour
             _boatSinked = true;
             IsSinking = false;
         }
+    }
+
+    public float WaterHeight() {
+        return Extensions.ScaleValue(transform.position.y, -0.8f, 0f, 0f, 1f);
     }
 
 }

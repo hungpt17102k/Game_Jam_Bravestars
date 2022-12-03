@@ -10,9 +10,17 @@ public class GamePanel : MonoBehaviour, IPanelUI
     [Title("OBJECT UI", bold: true, horizontalLine: true), Space(2)]
     public RectTransform hitBoxTrans;
 
+    public Image waterProcessImg;
+
     //------------------------------------Unity Functions----------------------------------
     private void Start()
     {
+
+    }
+
+    private void Update() {
+        WaterProcess();
+
 
     }
 
@@ -37,7 +45,7 @@ public class GamePanel : MonoBehaviour, IPanelUI
         hitBox.SetAsFirstSibling();
         hitBox.gameObject.SetActive(true);
 
-        print(hitboxUIPosition);
+        // print(hitboxUIPosition);
 
         hitBox.transform.localScale = Vector3.one;
         hitBox.transform.localRotation = Quaternion.identity;
@@ -45,5 +53,10 @@ public class GamePanel : MonoBehaviour, IPanelUI
         hitBox.GetComponent<HitBox>().idHitBox = idObs;
     }
 
+    public void WaterProcess() {
+        waterProcessImg.fillAmount = 1f - GameManager.Instance.boat.WaterHeight();
+    }
+
+    
 
 }

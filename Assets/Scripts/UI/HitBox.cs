@@ -8,5 +8,7 @@ public class HitBox : MonoBehaviour
 
     public void PressHitBox() {
         EventManager.Instance.DestroyObstacleEvent(idHitBox);
+        
+        Destroy(this.gameObject);
     }
 }
